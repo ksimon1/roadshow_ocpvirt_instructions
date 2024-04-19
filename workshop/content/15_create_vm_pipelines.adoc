@@ -1,0 +1,74 @@
+:scrollbar:
+:toc2:
+:numbered:
+
+= Creating Virtual Machines with OpenShift Virtualization and OpenShift Pipelines
+
+:numbered:
+
+This lab will introduce you to the basics of creating VMs in OpenShift Virtualization and OpenShift Pipelines. OpenShift Virtualization in combination with OpenShift Pipelines can give you opportunity to automate advanced flows with Virtual Machines.
+
+.Goals
+* Create a new virtual machine with OpenShift Pipelines
+
+== Create new Pipeline
+. Navigate to *Pipelines* -> *Pipelines*:
++
+image::images/virtualization_pipelines/00_pipelines_left_menu.png[]
+
+. Click *Create* -> *Pipeline*:
++
+image::images/virtualization_pipelines/01_create_pipeline.png[]
+
+. Click on Add task.
++
+image::images/virtualization_pipelines/02_add_task.png[]
+
+. Type `create-vm-from-template`. Select `create-vm-from-template` task and click add.
++
+image::images/virtualization_pipelines/03_create_vm.png[]
+
+. Click on create-vm-from-template task in pipeline builder and update parameters for create-vm-from-template task with these values:
++
+----
+templateName: rhel9-desktop-small
+templateNamespace: openshift
+templateParams: CLOUD_USER_PASSWORD:test
+vmNamespace: pipelines
+startVM: true
+----
++
+image::images/virtualization_pipelines/04_create_vm_params.png[]
+
+. Click on *Create*
++
+image::images/virtualization_pipelines/05_create_pipeline.png[]
+
+. Click on *Actions* -> *Start*:
++
+image::images/virtualization_pipelines/06_start_pipeline.png[]
+
+. Wait until PipelineRun finishes:
++
+image::images/virtualization_pipelines/07_pipeline_succeeded.png[]
+
+. Navigate to *Virtualization* -> *VirtualMachines*:
++
+image::images/virtualization_pipelines/08_virtual_machines.png[]
+
+. Open the rhel9-* VM:
++
+image::images/virtualization_pipelines/09_vm_list.png[]
+
+. Click on Console:
++
+image::images/virtualization_pipelines/10_vm_console.png[]
+
+. Log in with
++
+image::images/virtualization_pipelines/11_vm_login.png[]
++
+----
+username: cloud-user
+Password: test
+----
